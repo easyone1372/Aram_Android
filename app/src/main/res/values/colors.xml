@@ -9,6 +9,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="classicBlue">#0f4c81</color>
     <color name="classicBlueDark">#073861</color>
+    <color name="serenity">#92A8D1</color>
+    <color name="primrose">#f6d155</color>
     <color name="light_blue_600">#FF039BE5</color>
     <color name="light_blue_900">#FF01579B</color>
     <color name="light_blue_A200">#FF40C4FF</color>

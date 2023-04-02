@@ -83,7 +83,12 @@
                     android:textSize="20dp"
                     android:textStyle="bold" />
 
-                <EditText
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
                     android:id="@+id/user_id"
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
@@ -93,6 +98,17 @@
                     android:inputType="text"
                     android:text="" />
 
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/idcheckbutton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="48dp"
+                        android:layout_marginLeft="10dp"
+                        android:text="중복확인"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/signPWtext"

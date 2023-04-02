@@ -1,6 +1,7 @@
 package com.example.aram;
 
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,7 +22,9 @@ import org.json.JSONObject;
 public class RegisterActivity extends AppCompatActivity {
     private TextView back;
     private EditText name,id,pw,pw2,email;
-    private Button pwcheck, submit;
+    private Button pwcheck, submit, idcheckbutton;
+    private AlertDialog.Builder dialog;
+    private boolean validate = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,55 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+        //id 중복 확인 버튼
+        idcheckbutton = findViewById(R.id.idcheckbutton);
+        idcheckbutton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                String UserID = id.getText().toString();
+                if(validate){
+                    return; //검증완료
+                }
+
+                if(UserID.equals("")){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                    dialog = builder.setMessage("아이디를 입력하세요.").setPositiveButton("확인",null);
+                    dialog.show();
+                    return;
+                }
+
+                Response.Listener<String> responseListner = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try{
+                            JSONObject jsonResponse = new JSONObject(response);
+                            boolean success = jsonResponse.getBoolean("success");
+
+                            if(success){
+                                AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                                dialog = builder.setMessage("사용할 수 있는 아이디입니다.").setPositiveButton("확인",null);
+                                dialog.show();
+                                id.setEnabled(false);//아이디값 고정
+                                validate = true;//검증 완료
+                                idcheckbutton.setBackgroundColor(getResources().getColor(R.color.primrose));
+                            }
+                            else{
+                                AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                                dialog = builder.setMessage("이미 존재하는 아이디입니다.").setNegativeButton("확인",null);
+                                dialog.show();
+                            }
+                        }catch(JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                };
+                ValidateRequestActivity validateRequest = new ValidateRequestActivity(UserID,responseListner);
+                RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
+                queue.add(validateRequest);
+            }
+
+        });
+
         //회원가입 완료 버튼
         submit = findViewById(R.id.signupbutton);
         submit.setOnClickListener(new View.OnClickListener() { // 회원가입 버튼 클릭 시 수행
@@ -59,6 +111,14 @@ public class RegisterActivity extends AppCompatActivity {
                 String userPassword = pw.getText().toString();
                 String userName = name.getText().toString();
                 String userEmail = email.getText().toString();
+
+//                //아이디 중복체크 했는지 확인
+//                if(!validate){
+//                    AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+//                    dialog = builder.setMessage("중복된 아이디가 있는지 확인하세요.").setNegativeButton("확인", null).create();
+//                    dialog.show();
+//                    return;
+//                } 계속해서 migrate를 추천함. 다른 migrate 부분과 충돌되는 것 같음. 좀 더 연구 필요
 
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override

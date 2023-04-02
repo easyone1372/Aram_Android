@@ -68,9 +68,8 @@ public class MainMenuProfileFragment extends Fragment {
         tv_id = rootView.findViewById(R.id.tv_id);
         tv_email = rootView.findViewById(R.id.tv_email);
 
-        Intent intent = new Intent(getActivity(),LoginActivity.class);
-        String userID=intent.getStringExtra("userID");
-        String userEmail=intent.getStringExtra("userEmail");
+        String userID = this.getArguments().getString("tv_id");
+        String userEmail = this.getArguments().getString("tv_email");
 
         tv_id.setText(userID);
         tv_email.setText(userEmail);

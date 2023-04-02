@@ -1,19 +1,29 @@
 package com.example.aram;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,16 +33,24 @@ public class MainActivity extends AppCompatActivity {
     private MainMenuQuestFragment fragmentQuest = new MainMenuQuestFragment();
     private MainMenuProfileFragment fragmentProfile = new MainMenuProfileFragment();
 
+
+    ImageView imageView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        imageView = findViewById(R.id.imageView);
         FloatingActionButton fab = findViewById(R.id.fab_btn);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this,"You cliked on fab button",Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainActivity.this,"You cliked on fab button",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent,1);
+
             }
         });
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -41,6 +59,20 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.menu_bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new ItemSelectedListener());
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch(requestCode){
+            case 1:
+                if(resultCode == RESULT_OK){
+                    Uri uri = data.getData();
+                    imageView.setImageURI(uri);
+                }
+                break;
+        }
     }
     class ItemSelectedListener implements BottomNavigationView.OnNavigationItemSelectedListener{
 

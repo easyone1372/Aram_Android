@@ -27,11 +27,6 @@
                 app:elevation="6dp"
                 app:fabSize="normal" />
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageView"
-                android:layout_marginTop="10dp"/>
         </FrameLayout>
     </RelativeLayout>
 

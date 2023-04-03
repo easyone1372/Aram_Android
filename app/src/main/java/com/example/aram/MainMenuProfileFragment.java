@@ -26,7 +26,7 @@ public class MainMenuProfileFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private TextView tv_id, tv_email;
+
     public MainMenuProfileFragment() {
         // Required empty public constructor
     }
@@ -65,8 +65,8 @@ public class MainMenuProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_main_menu_profile, container, false);
-        tv_id = rootView.findViewById(R.id.tv_id);
-        tv_email = rootView.findViewById(R.id.tv_email);
+        TextView tv_id = rootView.findViewById(R.id.tv_id);
+        TextView tv_email = rootView.findViewById(R.id.tv_email);
 
         String userID = this.getArguments().getString("tv_id");
         String userEmail = this.getArguments().getString("tv_email");

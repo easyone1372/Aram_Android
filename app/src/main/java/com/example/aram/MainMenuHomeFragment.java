@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
@@ -64,6 +65,7 @@ public class MainMenuHomeFragment extends Fragment {
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_main_menu_home,container,false);
 
         final ScrollView scrollView = (ScrollView)rootView.findViewById(R.id.home_scroll);
+
         scrollView.post(new Runnable() {
             @Override
             public void run() {

@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class ValidateRequestActivity extends StringRequest {
     //서버 url 설정(php파일 연동)
-    final static private String URL = "http://10.0.2.2:80/try_aram/aram_register.php";
+    final static private String URL = "http://10.0.2.2:80/try_aram/aram_userValidate.php";
     private Map<String, String> map;
 
     public ValidateRequestActivity(String userID, Response.Listener<String>listner){

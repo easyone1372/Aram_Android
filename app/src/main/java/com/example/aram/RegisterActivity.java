@@ -69,7 +69,7 @@ public class RegisterActivity extends AppCompatActivity {
                     return;
                 }
 
-                Response.Listener<String> responseListner = new Response.Listener<String>() {
+                Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try{
@@ -94,7 +94,7 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     }
                 };
-                ValidateRequestActivity validateRequest = new ValidateRequestActivity(UserID,responseListner);
+                ValidateRequestActivity validateRequest = new ValidateRequestActivity(UserID,responseListener);
                 RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
                 queue.add(validateRequest);
             }

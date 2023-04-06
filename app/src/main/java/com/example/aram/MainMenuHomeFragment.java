@@ -64,15 +64,15 @@ public class MainMenuHomeFragment extends Fragment {
         // Inflate the layout for this fragment
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_main_menu_home,container,false);
 
-        final ScrollView scrollView = (ScrollView)rootView.findViewById(R.id.home_scroll);
-
-        scrollView.post(new Runnable() {
-            @Override
-            public void run() {
-                    scrollView.fullScroll(scrollView.FOCUS_DOWN);
-                }
-
-        });
+//        final ScrollView scrollView = (ScrollView)rootView.findViewById(R.id.home_scroll);
+//
+//        scrollView.post(new Runnable() {
+//            @Override
+//            public void run() {
+//                    scrollView.fullScroll(scrollView.FOCUS_DOWN);
+//                }
+//
+//        });
 
         return rootView;
     }
